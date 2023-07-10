@@ -8,20 +8,16 @@ FIRST_TASK_PATH = "./summer_practice/task1_summer_practice"
 #Модуль містить набір методів для отримання введення з консолі.
 require FIRST_TASK_PATH
 
-#Метод get_string_input отримує рядок введення з консолі, перевіряє, що введений рядок містить тільки букви 
-#українського або англійського алфавіту, і повертає цей рядок.
 module ConsoleInput
   def get_string_input()
     input = nil
-    until input && input.match?(/\A[a-zа-щьюяґєіїA-ZА-ЩЬЮЯҐЄІЇ]+\z/)
-      print "Input alphabetic value: "
+    until input && input.is_a?(String)
+      print "Input string value: "
       input = gets.chomp
     end
     input
   end
 
-  #Метод get_name_input отримує рядок введення з консолі, перевіряє, що введений рядок 
-  #має правильний формат для імені (наприклад, "Anna-Maria"), і повертає цей рядок.
   def get_name_input()
     input = nil
     until input && valid_name?(input)
@@ -31,8 +27,6 @@ module ConsoleInput
     input
   end
 
-  #Метод get_integer_input отримує рядок введення з консолі, перевіряє, 
-  #що введений рядок складається тільки з цифр, і повертає це значення у вигляді цілого числа (input.to_i).
   def get_integer_input()
     input = nil
     until input && input.match?(/\A[0-9]+\z/)
@@ -42,8 +36,6 @@ module ConsoleInput
     input.to_i
   end
 
-  #Метод get_inn_input призначений для отримання вхідних даних від користувача, 
-  #пов'язаних з ІНН , та перевіряє їх на валідність за допомогою функції valid_inn?()
   def get_inn_input()
     input = nil
     until input && valid_inn?(input)
@@ -53,15 +45,12 @@ module ConsoleInput
     input
   end
 
-
   def valid_date_format?(input)
     /^\d{4}-\d{2}-\d{2}$/.match?(input) && Date.parse(input)
   rescue ArgumentError
     false
   end
 
-  #Метод get_date_input() отримує вхідні дані від користувача, пов'язані з датою, 
-  #і перевіряє їх на відповідність формату та коректність за допомогою функції valid_date_format?()
   def get_date_input()
     input = nil
     until input && valid_date_format?(input)
